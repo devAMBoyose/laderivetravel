@@ -1,14 +1,39 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
   <url>
     <loc>https://laderivetravel.com/</loc>
+<<<<<<< HEAD
     ...
+=======
+    <lastmod>2025-05-18</lastmod>
+    <priority>1.00</priority>
+>>>>>>> 5bb96fbf17464204e5854874e562a8481febe06d
   </url>
+
   <url>
     <loc>https://laderivetravel.com/about.html</loc>
+<<<<<<< HEAD
     ...
+=======
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.80</priority>
+>>>>>>> 5bb96fbf17464204e5854874e562a8481febe06d
   </url>
+
   <url>
     <loc>https://laderivetravel.com/deals.html</loc>
+<<<<<<< HEAD
     ...
+=======
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.85</priority>
   </url>
+
+  <url>
+    <loc>https://laderivetravel.com/reservation.html</loc>
+    <lastmod>2025-05-18</lastmod>
+    <priority>0.80</priority>
+>>>>>>> 5bb96fbf17464204e5854874e562a8481febe06d
+  </url>
+
 </urlset>
