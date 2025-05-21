@@ -240,26 +240,11 @@ https://templatemo.com/tm-580-woox-travel
   <script src="assets/js/custom.js"></script>
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script>
-    const form = document.getElementById('reservation-form');
-    const modal = document.getElementById('thank-you-modal');
-
-    form.addEventListener('submit', function (e) {
-      e.preventDefault(); // Prevent form from submitting normally
-      modal.style.display = 'block'; // Show modal
-      form.reset(); // Optionally reset the form
+  <script>
+    $(".option").click(function(){
+      $(".option").removeClass("active");
+      $(this).addClass("active"); 
     });
-
-    function closeModal() {
-      modal.style.display = 'none';
-    }
-
-    // Optional: close modal when clicking outside the content
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        closeModal();
-      }
-    }
   </script>
 
 
