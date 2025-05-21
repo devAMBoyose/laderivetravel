@@ -116,33 +116,38 @@
 
         <div class="col-lg-12">
           <form id="reservation-form" name="gs" method="POST" action="https://formsubmit.co/krystel@laderivetravel.com">
+            <!-- Hidden fields for email response -->
             <input type="hidden" name="_subject" value="New Reservation Request from La Dérive Travel">
+            <input type="hidden" name="_autoresponse" value="Thank you for booking. One of our representatives will contact you shortly.">
+            <input type="hidden" name="_from" value="sales@laderivetravel.com">
+            <input type="hidden" name="_template" value="table">
+          
             <div class="row">
               <div class="col-lg-12">
                 <h4>Make Your <em>Reservation</em> Through This <em>Form</em></h4>
               </div>
-
+          
               <div class="col-lg-6">
                 <fieldset>
                   <label for="Name" class="form-label">Your Name</label>
                   <input type="text" id="Name" name="Name" class="Name" placeholder="Ex. John Smithee" autocomplete="on" required>
                 </fieldset>
               </div>
-
+          
               <div class="col-lg-6">
                 <fieldset>
                   <label for="Email" class="form-label">Your Email Address</label>
                   <input type="email" id="Email" name="email" class="Email" placeholder="Ex. john@example.com" autocomplete="on" required>
                 </fieldset>
               </div>
-
+          
               <div class="col-lg-6">
                 <fieldset>
                   <label for="Number" class="form-label">Your Phone Number</label>
                   <input type="text" id="Number" name="Number" class="Number" placeholder="Ex. +xxx xxx xxx" autocomplete="on" required>
                 </fieldset>
               </div>
-
+          
               <div class="col-lg-6">
                 <fieldset>
                   <label for="chooseGuests" class="form-label">Number Of Guests</label>
@@ -155,14 +160,14 @@
                   </select>
                 </fieldset>
               </div>
-
+          
               <div class="col-lg-6">
                 <fieldset>
                   <label for="date" class="form-label">Check In Date</label>
                   <input type="date" id="date" name="Date" class="date" required>
                 </fieldset>
               </div>
-
+          
               <div class="col-lg-12">
                 <fieldset>
                   <label for="chooseDestination" class="form-label">Choose Your Destination</label>
@@ -175,7 +180,7 @@
                   </select>
                 </fieldset>
               </div>
-
+          
               <div class="col-lg-12">
                 <fieldset>
                   <button type="submit" class="main-button">Make Your Reservation Now</button>
@@ -183,6 +188,7 @@
               </div>
             </div>
           </form>
+
         </div>
       </div>
     </div>
