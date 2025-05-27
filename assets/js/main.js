@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
     };
 
     try {
-      const response = await fetch('https://laderivetravel.com/send-reservation', {
+      const response = await fetch('https://laderivetravel-backend.onrender.com/send-reservation', {
+
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
