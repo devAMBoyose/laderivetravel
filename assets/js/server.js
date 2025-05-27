@@ -3,7 +3,7 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -12,8 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/send-reservation', (req, res) => {
   const { name, email, phone, guests, date, destination } = req.body;
 
-  // ✅ Log the incoming data
-  console.log('Incoming reservation:', req.body);
+  console.log('✅ Incoming reservation:', req.body);
 
   const transporter = nodemailer.createTransport({
     host: 'mail.privateemail.com',
@@ -51,5 +50,5 @@ app.post('/send-reservation', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`✅ Server running on http://localhost:${port}`);
+  console.log(`✅ Server running on port ${port}`);
 });
