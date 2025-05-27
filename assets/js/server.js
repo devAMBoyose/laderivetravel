@@ -19,10 +19,11 @@ app.post('/send-reservation', (req, res) => {
     port: 587,
     secure: false,
     auth: {
-      user: 'sales@laderivetravel.com',
-      pass: '4xlwd4bm8@'
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
     }
   });
+  
 
   const mailOptions = {
     from: `"${name}" <${email}>`,
