@@ -1,55 +1,52 @@
 const express = require('express');
-const nodemailer = require('nodemailer');
 const cors = require('cors');
-const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+const sendMail = require('./mailer');
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 3000;
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+// ALLOW frontend domain
+app.use(cors({
+  origin: 'https://laderivetravel.com', // <-- your frontend domain
+  methods: ['GET', 'POST'],
+  credentials: true
+}));
 
-app.post('/send-reservation', (req, res) => {
-  const { name, email, phone, guests, date, destination } = req.body;
+app.use(express.json());
 
-  console.log('✅ Incoming reservation:', req.body);
+app.post('/send-reservation', async (req, res) => {
+  try {
+    const { name, phone, email, guests, date, destination } = req.body;
 
-  const transporter = nodemailer.createTransport({
-    host: 'mail.privateemail.com',
-    port: 587,
-    secure: false,
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS
+    if (!name || !phone || !email || !guests || !date || !destination) {
+      return res.status(400).json({ message: 'All fields are required' });
     }
-  });
-  
 
-  const mailOptions = {
-    from: `"${name}" <${email}>`,
-    to: 'sales@laderivetravel.com',
-    subject: 'New Reservation Inquiry',
-    html: `
-      <h3>Reservation Request</h3>
-      <p><strong>Name:</strong> ${name}</p>
-      <p><strong>Email:</strong> ${email}</p>
-      <p><strong>Phone Number:</strong> ${phone}</p>
-      <p><strong>Number of Guests:</strong> ${guests}</p>
-      <p><strong>Check-In Date:</strong> ${date}</p>
-      <p><strong>Destination:</strong> ${destination}</p>
-    `
-  };
+    const subject = `New Reservation from ${name}`;
+    const text = `
+      Name: ${name}
+      Phone: ${phone}
+      Email: ${email}
+      Guests: ${guests}
+      Date: ${date}
+      Destination: ${destination}
+    `;
 
-  transporter.sendMail(mailOptions, (error, info) => {
-    if (error) {
-      console.error('❌ Email error:', error);
-      return res.status(500).json({ message: 'Failed to send email' });
-    }
-    console.log('✅ Email sent:', info.response);
-    res.status(200).json({ message: 'Reservation sent successfully!' });
-  });
+    const result = await sendMail({
+      to: process.env.EMAIL_RECEIVER,
+      subject,
+      text
+    });
+
+    res.status(200).json({ message: 'Reservation submitted successfully!' });
+  } catch (error) {
+    console.error('Email Error:', error);
+    res.status(500).json({ message: 'Failed to send reservation.' });
+  }
 });
 
-app.listen(port, () => {
-  console.log(`✅ Server running on port ${port}`);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
