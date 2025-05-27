@@ -13,12 +13,12 @@ app.post('/send-reservation', (req, res) => {
   const { name, email, phone, guests, date, destination } = req.body;
 
   const transporter = nodemailer.createTransport({
-    host: 'mail.privateemail.com', // ✅ Namecheap's mail server
+    host: 'mail.privateemail.com',
     port: 587,
-    secure: false, // true for port 465, false for 587
+    secure: false,
     auth: {
-      user: 'sales@laderivetravel.com',     // ✅ your Private Email
-      pass: '4xlwd4bm8@'           // ✅ the email password you set in cPanel
+      user: 'sales@laderivetravel.com',
+      pass: '4xlwd4bm8@'
     }
   });
 

@@ -11,7 +11,7 @@ document.getElementById('reservationForm').addEventListener('submit', async func
     };
   
     try {
-      const response = await fetch('/send-reservation', {
+      const response = await fetch('https://laderivetravel.com/send-reservation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -19,10 +19,16 @@ document.getElementById('reservationForm').addEventListener('submit', async func
         body: JSON.stringify(formData)
       });
   
-      if (!response.ok) throw new Error('Server error');
+      if (!response.ok) throw new Error(`Server responded with ${response.status}`);
   
       const result = await response.json();
-      alert(result.message);
+  
+      if (result.message) {
+        alert(result.message);
+      } else {
+        throw new Error('Invalid response from server');
+      }
+  
     } catch (error) {
       console.error('Error:', error);
       alert('Something went wrong. Check console for details.');
