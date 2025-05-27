@@ -12,6 +12,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/send-reservation', (req, res) => {
   const { name, email, phone, guests, date, destination } = req.body;
 
+  // ✅ Log the incoming data
+  console.log('Incoming reservation:', req.body);
+
   const transporter = nodemailer.createTransport({
     host: 'mail.privateemail.com',
     port: 587,
@@ -39,13 +42,14 @@ app.post('/send-reservation', (req, res) => {
 
   transporter.sendMail(mailOptions, (error, info) => {
     if (error) {
-      console.error('Email error:', error);
+      console.error('❌ Email error:', error);
       return res.status(500).json({ message: 'Failed to send email' });
     }
-    res.json({ message: 'Reservation sent successfully!' });
+    console.log('✅ Email sent:', info.response);
+    res.status(200).json({ message: 'Reservation sent successfully!' });
   });
 });
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`);
+  console.log(`✅ Server running on http://localhost:${port}`);
 });
