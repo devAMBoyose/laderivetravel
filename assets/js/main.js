@@ -1,25 +1,28 @@
-
-  document.getElementById('reservationForm').addEventListener('submit', async function (e) {
+document.getElementById('reservationForm').addEventListener('submit', async function (e) {
     e.preventDefault();
-
-    const form = e.target;
-    const formData = new FormData(form);
-    const data = Object.fromEntries(formData.entries());
-
+  
+    const formData = {
+      Name: document.getElementById('Name').value,
+      Number: document.getElementById('Number').value,
+      Guests: document.getElementById('Guests').value,
+      date: document.getElementById('date').value,
+      Destination: document.getElementById('Destination').value,
+      Email: document.getElementById('Email').value
+    };
+  
     try {
-      const response = await fetch('/reserve', {
+      const response = await fetch('/send', { // ✅ corrected endpoint
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(formData)
       });
-
-      const result = await response.text(); // Or response.json()
-      alert(result);
-      form.reset(); // Optional: reset form after submission
-    } catch (err) {
-      console.error('Submission failed:', err);
-      alert('Error sending reservation. Please try again.');
+  
+      const result = await response.json();
+      alert(result.message);
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Something went wrong. Check console for details.');
     }
-  });
+  });  
