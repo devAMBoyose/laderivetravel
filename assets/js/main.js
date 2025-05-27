@@ -2,22 +2,24 @@ document.getElementById('reservationForm').addEventListener('submit', async func
     e.preventDefault();
   
     const formData = {
-      Name: document.getElementById('Name').value,
-      Number: document.getElementById('Number').value,
-      Guests: document.getElementById('Guests').value,
+      name: document.getElementById('Name').value,
+      phone: document.getElementById('Number').value,
+      guests: document.getElementById('Guests').value,
       date: document.getElementById('date').value,
-      Destination: document.getElementById('Destination').value,
-      Email: document.getElementById('Email').value
+      destination: document.getElementById('Destination').value,
+      email: document.getElementById('Email').value
     };
   
     try {
-      const response = await fetch('/send', { // ✅ corrected endpoint
+      const response = await fetch('/send-reservation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(formData)
       });
+  
+      if (!response.ok) throw new Error('Server error');
   
       const result = await response.json();
       alert(result.message);

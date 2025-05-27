@@ -1,6 +1,3 @@
-// server.js
-require('dotenv').config(); // ✅ Load .env variables
-
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
@@ -12,31 +9,31 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/send', (req, res) => {
-  const { Name, Email, Number, Guests, date, Destination } = req.body;
+app.post('/send-reservation', (req, res) => {
+  const { name, email, phone, guests, date, destination } = req.body;
 
   const transporter = nodemailer.createTransport({
-    host: 'mail.privateemail.com', // ✅ Namecheap’s Private Email SMTP
-    port: 465,
-    secure: true, // use SSL
+    host: 'mail.privateemail.com', // ✅ Namecheap's mail server
+    port: 587,
+    secure: false, // true for port 465, false for 587
     auth: {
-      user: process.env.EMAIL_USER, // 👉 from .env
-      pass: process.env.EMAIL_PASS  // 👉 from .env
+      user: 'sales@laderivetravel.com',     // ✅ your Private Email
+      pass: '4xlwd4bm8@'           // ✅ the email password you set in cPanel
     }
   });
 
   const mailOptions = {
-    from: `"La Dérive Travel" <${process.env.EMAIL_USER}>`,
-    to: process.env.EMAIL_USER,
+    from: `"${name}" <${email}>`,
+    to: 'sales@laderivetravel.com',
     subject: 'New Reservation Inquiry',
     html: `
       <h3>Reservation Request</h3>
-      <p><strong>Name:</strong> ${Name}</p>
-      <p><strong>Email:</strong> ${Email}</p>
-      <p><strong>Phone Number:</strong> ${Number}</p>
-      <p><strong>Guests:</strong> ${Guests}</p>
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Email:</strong> ${email}</p>
+      <p><strong>Phone Number:</strong> ${phone}</p>
+      <p><strong>Number of Guests:</strong> ${guests}</p>
       <p><strong>Check-In Date:</strong> ${date}</p>
-      <p><strong>Destination:</strong> ${Destination}</p>
+      <p><strong>Destination:</strong> ${destination}</p>
     `
   };
 
@@ -50,5 +47,5 @@ app.post('/send', (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
