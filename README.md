@@ -35,13 +35,7 @@ Built using Node.js + Express with Nodemailer.
 🌐 Live Website
 🔗 https://laderivetravel.com
 
-📸 Preview
-
-Full travel website UI (Homepage, About, Deals, Reservation)
-(Insert screenshot images here if needed)
-
 📄 License
-
 This project is private and developed for a client.
 Unauthorized copying or distribution is prohibited.
 
